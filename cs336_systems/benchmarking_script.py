@@ -9,7 +9,7 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
 
     model = BasicsTransformerLM(
             vocab_size=10000,
-            context_length=200,
+            context_length=100000,
             d_model=d_model,
             num_layers=num_layers,
             num_heads=num_heads,
@@ -18,7 +18,7 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
     
     
     
-    x = torch.randint(1, 5, (1, 150), device=device)
+    x = torch.randint(1, 1000, (1, 99000), device=device)
 
     for step in range(w_num_steps):
         print(f"\rWarm-up step forward pass: {step}", end="")
