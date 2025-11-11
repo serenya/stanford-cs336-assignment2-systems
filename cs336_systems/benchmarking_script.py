@@ -21,20 +21,20 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
     x = torch.randint(1, 5, (1, 150), device=device)
 
     for step in range(w_num_steps):
-        print(f"\rWarm-up step forward: {step}", end="")
+        print(f"\rWarm-up step forward pass: {step}", end="")
         y = model(x).mean()
 
     forward_time = []
     backward_time = []
     for step in range(num_steps):
-        print(f"\rBenchmark step forward: {step}", end="")
+        print(f"\rBenchmark step forward pass: {step}", end="")
         t1 = timeit.default_timer()
         y = model(x).mean()
         torch.cuda.synchronize()
         t2 = timeit.default_timer()
         forward_time.append(t2-t1)
 
-        print(f"\rBenchmark step backward: {step}", end="")
+        print(f"\rBenchmark step backward pass: {step}", end="")
         t1 = timeit.default_timer()
         y.backward()
         torch.cuda.synchronize()
@@ -42,10 +42,10 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
         backward_time.append(t2-t1)
         
     print(f"=================Benchmark for model {size} finished=================")
-    print(f"Forward average timing: {np.average(forward_time)}")
-    print(f"Forward stadard deviation timing: {np.std(np.array(forward_time))}")
-    print(f"Backward average timing: {np.average(backward_time)}")
-    print(f"Backward stadard deviation timing: {np.std(np.array(backward_time))}")
+    print(f"Forward pass timing average: {np.average(forward_time)}")
+    print(f"Forward pass timing stadard deviation: {np.std(np.array(forward_time))}")
+    print(f"Backward pass timing average: {np.average(backward_time)}")
+    print(f"Backward pass timing stadard deviation: {np.std(np.array(backward_time))}")
     
 
 if __name__ == "__main__":
