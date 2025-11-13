@@ -8,6 +8,7 @@ from cs336_systems.model import BasicsTransformerLM
 from einops import rearrange, einsum
 from jaxtyping import Float, Bool, Int
 from nn_utils import softmax
+import math
 
 def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_num_steps, num_steps):
     print(f"=================Benchmark for model {size} started=================")
