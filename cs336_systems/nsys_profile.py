@@ -74,7 +74,7 @@ def annotated_scaled_dot_product_attention(
 
     with nvtx.range("final matmul"):
         matmul = einsum(attention_weights, V, "... query key, ... key d_v ->  ... query d_v")
-
+    
     return matmul
     
 
