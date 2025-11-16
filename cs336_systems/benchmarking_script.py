@@ -1,7 +1,8 @@
 import torch
 import numpy as np
 import timeit
-from cs336_systems.model import BasicsTransformerLM
+
+from cs336_basics.model import BasicsTransformerLM
 import pandas as pd
 
 def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_num_steps, num_steps):
