@@ -11,14 +11,14 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
 
     model = BasicsTransformerLM(
             vocab_size=10000,
-            context_length=200,
+            context_length=256,
             d_model=d_model,
             num_layers=num_layers,
             num_heads=num_heads,
             d_ff=d_ff,
             rope_theta=0.5).to(device)
     
-    x = torch.randint(1, 1000, (1, 150), device=device)
+    x = torch.randint(0, 10000, (4, 256), device=device)
 
     for step in range(w_num_steps):
         print(f"\rWarm-up step forward pass: {step}", end="")
@@ -63,16 +63,48 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="small", d_model=768, d_ff=3072, num_layers=12, num_heads=12, w_num_steps = 5, num_steps = 10))
 
-    results.append(run_basics_transformer_model(size="medium", d_model=1024, d_ff=4096, num_layers=24, num_heads=16, w_num_steps = 5, num_steps = 10))
+    """ results.append(run_basics_transformer_model(size="medium", d_model=1024, d_ff=4096, num_layers=24, num_heads=16, w_num_steps = 5, num_steps = 10))
 
     results.append(run_basics_transformer_model(size="large", d_model=1280, d_ff=5120, num_layers=36, num_heads=20, w_num_steps = 5, num_steps = 10))
 
     results.append(run_basics_transformer_model(size="xl", d_model=1600, d_ff=6400, num_layers=48, num_heads=25, w_num_steps = 5, num_steps = 10))
 
-    results.append(run_basics_transformer_model(size="2.7B", d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10))
+    results.append(run_basics_transformer_model(size="2.7B", d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10)) """
 
     df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std'])
 
     print("\n=================Benchmark Results=================")
     print(df.to_markdown(index=False))
     print("===================================================\n")
+
+
+    """ def forward_backward(model, x, y, autocast_context, grad_scaler=None):
+    Nvtx.push("forward_backward")
+
+    Nvtx.push("zero_grad")
+    model.zero_grad()
+    Nvtx.pop() 
+
+    # Forward pass
+    Nvtx.push("forward")
+    Nvtx.push("model_forward")
+    with autocast_context:
+        logits = model.forward(x)
+    Nvtx.pop() 
+
+    Nvtx.push("loss_computation")
+    with autocast_context:
+        loss = cross_entropy(logits, y)
+    Nvtx.pop()  
+    Nvtx.pop()  
+
+    # Backward pass
+    Nvtx.push("backward")
+    if grad_scaler is not None:
+        grad_scaler.scale(loss).backward()
+    else:
+        loss.backward()
+    Nvtx.pop() 
+
+    Nvtx.pop() 
+    return loss """
