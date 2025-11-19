@@ -29,6 +29,9 @@ include = ["cs336_basics"]
 [tool.uv]
 package = true
 python-preference = "managed"
+override-dependencies = [
+    "torch; python_version < '3.0'",
+]
 
 [tool.pytest.ini_options]
 log_cli = true
