@@ -73,3 +73,7 @@ is time consuming. Therefore following commands are required to be executed to s
 2. `cd stanford-cs336-assignment2-systems/`
 3. `uv venv --system-site-packages` - to allow Python module to reference locally installed dependencies
 4. `uv run --no-default-groups python -m cs336_systems.benchmarking_script` - to run actual module excluding dependencies from defailt group including dev.
+
+Above script could be executed remotely by running ssh command:
+
+`ssh root@69.30.85.194 -p 22191 -i ~/.ssh/runpod_ed25519 "bash -s -- https://github.com/serenya/stanford-cs336-assignment2-systems.git task/nsys_profile.py cs336_systems.benchmarking_script" < cs336_systems/run_benchmarking_script_on_runpod.sh`
