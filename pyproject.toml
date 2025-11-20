@@ -10,9 +10,7 @@ dependencies = [
     "matplotlib",
     "numpy",
     "pytest>=8",
-    "regex>=2024.11.6",
-    "torch~=2.8.0; sys_platform != 'darwin' or platform_machine != 'x86_64'",
-    "torch~=2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'", # Intel Macs
+    "regex>=2024.11.6", # Intel Macs
     "tqdm>=4.67.1",
     "wandb>=0.19.7",
     "pandas>=2",
@@ -28,15 +26,18 @@ build-backend = "uv_build"
 module-name = "cs336_systems"
 module-root = ""
 
+
+[dependency-groups]
+dev = [
+    "torch>=2.8.0",
+]
+
 [tool.uv]
 package = true
 python-preference = "managed"
 
 [tool.uv.sources]
-torch = { path = " /usr/local/lib/python3.12/dist-packages/torch" }
 cs336-basics = { path = "./cs336-basics", editable = true }  # Change this path to your assignment1-basics repo you want to use your own implementation!
-
-
 
 [tool.pytest.ini_options]
 log_cli = true
