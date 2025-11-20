@@ -77,3 +77,5 @@ is time consuming. Therefore following commands are required to be executed to s
 Above script could be executed remotely by running ssh command:
 
 `ssh root@69.30.85.194 -p 22191 -i ~/.ssh/runpod_ed25519 "bash -s -- https://github.com/serenya/stanford-cs336-assignment2-systems.git task/nsys_profile.py cs336_systems.benchmarking_script" < cs336_systems/run_benchmarking_script_on_runpod.sh`
+
+**Bear in mind that "SSH over exposed TCP" should be taken from Connect tab in RunPod server details screen.**

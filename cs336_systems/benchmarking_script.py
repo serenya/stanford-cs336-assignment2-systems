@@ -22,9 +22,9 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
     x = torch.randint(0, 10000, (4, 256), device=device)
     y = torch.randint(0, 10000, (4, 256), device=device)
 
-    for step in range(w_num_steps):
+    """ for step in range(w_num_steps):
         print(f"\rWarm-up step forward pass: {step}", end="")
-        logits = model(x)
+        logits = model(x) """
 
     forward_time = []
     backward_time = []
