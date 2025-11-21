@@ -14,17 +14,17 @@ dependencies = [
     "regex>=2024.11.6", # more powerful regex than the builtin `re` module
     "submitit>=1.5.2", # job submission for SLURM
     "tiktoken>=0.9.0",
-    "torch~=2.6.0; sys_platform != 'darwin' or platform_machine != 'x86_64'",
-    "torch~=2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'", # Intel Macs
     "tqdm>=4.67.1",
     "wandb>=0.19.7",
 ]
 
-
+[dependency-groups]
+dev = [
+    "torch>=2.8.0",
+]
 
 [tool.setuptools.packages.find]
 include = ["cs336_basics"]
-
 
 [tool.uv]
 package = true
@@ -34,7 +34,6 @@ python-preference = "managed"
 log_cli = true
 log_cli_level = "WARNING"
 addopts = "-s"
-
 
 [tool.ruff]
 line-length = 120

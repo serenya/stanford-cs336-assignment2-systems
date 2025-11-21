@@ -63,3 +63,19 @@ To submit, run `./test_and_make_submission.sh` . This script will install your
 code's dependencies, run tests, and create a gzipped tarball with the output. We
 should be able to unzip your submitted tarball and run
 `./test_and_make_submission.sh` to verify your test results.
+
+## Deploy to RunPod https://console.runpod.io/
+
+The container image on RunPod has PyTorch dependency preinstalled. Considering it's size everytime spinning up a new instance and downloading PyTorch dependency
+is time consuming. Therefore following commands are required to be executed to skip installing PyTorch dependency into virtual environment:
+
+1. `git clone https://github.com/serenya/stanford-cs336-assignment2-systems.git`
+2. `cd stanford-cs336-assignment2-systems/`
+3. `uv venv --system-site-packages` - to allow Python module to reference locally installed dependencies
+4. `uv run --no-default-groups python -m cs336_systems.benchmarking_script` - to run actual module excluding dependencies from default group including dev.
+
+Above script could be executed remotely by running ssh command:
+
+`ssh root@195.26.232.152 -p 51096 -i ~/.ssh/runpod_ed25519 "bash -s -- https://github.com/serenya/stanford-cs336-assignment2-systems.git task/nsys_profile.py cs336_systems.benchmarking_script" < cs336_systems/run_benchmarking_script_on_runpod.sh`
+
+**Bear in mind that "SSH over exposed TCP" should be taken from Connect tab in RunPod server details screen.**
