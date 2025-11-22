@@ -23,9 +23,9 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
     x = torch.randint(0, 10000, (4, 256), device=device)
     y = torch.randint(0, 10000, (4, 256), device=device)
 
-    """ for step in range(w_num_steps):
+    for step in range(w_num_steps):
         print(f"\rWarm-up step forward pass: {step}", end="")
-        logits = model(x) """
+        logits = model(x)
 
     forward_time = []
     backward_time = []
@@ -68,7 +68,7 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
 if __name__ == "__main__":
     results = []
 
-    results.append(run_basics_transformer_model(size="small", d_model=768, d_ff=3072, num_layers=12, num_heads=12, w_num_steps = 5, num_steps = 10, use_autocast=False))
+    """ results.append(run_basics_transformer_model(size="small", d_model=768, d_ff=3072, num_layers=12, num_heads=12, w_num_steps = 5, num_steps = 10, use_autocast=False))
 
     results.append(run_basics_transformer_model(size="medium", d_model=1024, d_ff=4096, num_layers=24, num_heads=16, w_num_steps = 5, num_steps = 10, use_autocast=False))
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="large", d_model=1280, d_ff=5120, num_layers=36, num_heads=20, w_num_steps = 5, num_steps = 10, use_autocast=True))
 
-    results.append(run_basics_transformer_model(size="xl", d_model=1600, d_ff=6400, num_layers=48, num_heads=25, w_num_steps = 5, num_steps = 10, use_autocast=True))
+    results.append(run_basics_transformer_model(size="xl", d_model=1600, d_ff=6400, num_layers=48, num_heads=25, w_num_steps = 5, num_steps = 10, use_autocast=True)) """
 
     results.append(run_basics_transformer_model(size="2.7B", d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
 
