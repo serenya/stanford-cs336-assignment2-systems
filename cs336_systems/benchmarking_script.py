@@ -63,7 +63,7 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
     print(f"Backward pass timing average: {backward_time_average}")
     print(f"Backward pass timing stadard deviation: {backward_time_standard_deviation}")
 
-    return (size, forward_time_average, forward_time_standard_deviation, backward_time_average, backward_time_standard_deviation)
+    return (size, forward_time_average, forward_time_standard_deviation, backward_time_average, backward_time_standard_deviation, use_autocast)
 
 if __name__ == "__main__":
     results = []
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="2.7B", d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
 
-    df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std', 'Full precision'])
+    df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std', 'Mixed precision'])
 
     print("\n=================Benchmark Results=================")
     print(df.to_markdown(index=False))
