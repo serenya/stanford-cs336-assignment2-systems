@@ -29,7 +29,7 @@ def run_basics_transformer_model(size, d_model, d_ff, num_layers, num_heads, w_n
 
     forward_time = []
     backward_time = []
-    autocast_context = torch.autocast(device_type='cuda') if use_autocast else nullcontext()
+    autocast_context = torch.autocast(device_type='cuda', dtype=torch.bfloat16) if use_autocast else nullcontext()
     for step in range(num_steps):
         print(f"\rBenchmark step forward pass: {step}", end="")
         t1 = timeit.default_timer()
