@@ -13,7 +13,9 @@ output=$(runpodctl create pod \
   --secureCloud \
   --imageName "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404" \
   --containerDiskSize 30 \
-  --volumeSize 10 \
+  --volumeSize 30 \
+  --ports 8888/http \
+  --ports 22/tcp \
   --env PUBLIC_KEY="$PUBLIC_KEY")
 
 echo "create output: $output"
