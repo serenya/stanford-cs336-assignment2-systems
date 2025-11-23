@@ -6,7 +6,7 @@ SLEEP_TIME=10 # Seconds to wait between attempts
 
 echo "Starting to poll for port 22 address for Pod ID: ${POD_ID} (Max attempts: ${MAX_ATTEMPTS})"
 
-sleep $(( 2 * $SLEEP_TIME ))
+sleep $(( 3 * $SLEEP_TIME ))
 
 for i in $(seq 1 $MAX_ATTEMPTS); do
     echo "Attempt $i of $MAX_ATTEMPTS..."
