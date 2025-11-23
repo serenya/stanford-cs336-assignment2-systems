@@ -8,14 +8,14 @@ PUBLIC_KEY=$(<"$HOME/.ssh/runpod_ed25519.pub")
 output=$(runpodctl create pod \
   --name "my-training-pod" \
   --templateId "runpod-torch-v280" \
-  --gpuType "NVIDIA RTX A5000" \
+  --gpuType "NVIDIA L40S" \
   --gpuCount 1 \
   --secureCloud \
   --imageName "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404" \
   --containerDiskSize 30 \
   --volumeSize 10 \
   --env PUBLIC_KEY="$PUBLIC_KEY")
-#"NVIDIA L40S" \
+
 echo "create output: $output"
 
 # Extract the pod ID using regex (assuming output: pod "<ID>" created ...)
