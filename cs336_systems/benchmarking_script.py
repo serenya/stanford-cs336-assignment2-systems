@@ -49,7 +49,7 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
             t2 = timeit.default_timer()
             forward_time.append(t2-t1)
 
-            """ print(f"\rBenchmark step backward pass: {step}", end="")
+            print(f"\rBenchmark step backward pass: {step}", end="")
             t1 = timeit.default_timer()
             loss = cross_entropy(logits, y)
 
@@ -60,13 +60,13 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
             torch.cuda.synchronize()
 
         t2 = timeit.default_timer()
-        backward_time.append(t2-t1) """
+        backward_time.append(t2-t1)
 
-        # Save a pickle file to be loaded by PyTorch's online tool.
-        torch.cuda.memory._dump_snapshot(f"/workspace/memory_snapshot_{context_length}.pickle")
+    # Save a pickle file to be loaded by PyTorch's online tool.
+    torch.cuda.memory._dump_snapshot(f"/workspace/memory_snapshot_{context_length}.pickle")
 
-        # Stop recording history.
-        torch.cuda.memory._record_memory_history(enabled=None)
+    # Stop recording history.
+    torch.cuda.memory._record_memory_history(enabled=None)
 
     print(f"\r=================Benchmark for model {size} {"mixed precision" if use_autocast else "full precision"} finished=================", flush=True)
     forward_time_average = np.average(forward_time)
