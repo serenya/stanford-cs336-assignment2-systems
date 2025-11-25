@@ -23,8 +23,8 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
     
     optimizer = AdamW(model.parameters(), lr=0.01)
     
-    x = torch.randint(0, 1000, (4, context_length), device=device)
-    y = torch.randint(0, 1000, (4, context_length), device=device)
+    x = torch.randint(0, 10000, (4, context_length), device=device)
+    y = torch.randint(0, 10000, (4, context_length), device=device)
 
     for step in range(w_num_steps):
         print(f"\rWarm-up step forward pass: {step}", end="")
@@ -104,7 +104,10 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="2.7B", context_length=256, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True)) """
 
-    results.append(run_basics_transformer_model(size="2.7B", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
+    #results.append(run_basics_transformer_model(size="2.7B", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
+
+    results.append(run_basics_transformer_model(size="medium", context_length=256, d_model=1024, d_ff=4096, num_layers=24, num_heads=16, w_num_steps = 5, num_steps = 10, use_autocast=True))
+
 
     df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std', 'Mixed precision BF16'])
 
