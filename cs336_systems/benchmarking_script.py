@@ -63,7 +63,7 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
         backward_time.append(t2-t1)
 
         # Save a pickle file to be loaded by PyTorch's online tool.
-        torch.cuda.memory._dump_snapshot("memory_snapshot.pickle")
+        torch.cuda.memory._dump_snapshot(f"/workspace/memory_snapshot_{context_length}.pickle")
 
         # Stop recording history.
         torch.cuda.memory._record_memory_history(enabled=None)
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="2.7B", context_length=256, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True)) """
 
-    results.append(run_basics_transformer_model(size="2.7B", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
+    results.append(run_basics_transformer_model(size="small", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
 
     df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std', 'Mixed precision BF16'])
 
