@@ -9,7 +9,7 @@ JUPYTER_PASSWORD=$(openssl rand -base64 15)
 output=$(runpodctl create pod \
   --name "my-training-pod" \
   --templateId "runpod-torch-v280" \
-  --gpuType "NVIDIA RTX A6000" \
+  --gpuType "NVIDIA A100 80GB PCIe" \
   --gpuCount 1 \
   --secureCloud \
   --imageName "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404" \
@@ -20,7 +20,7 @@ output=$(runpodctl create pod \
   --env PUBLIC_KEY="$PUBLIC_KEY" \
   --env JUPYTER_PASSWORD="$JUPYTER_PASSWORD")
 
-#NVIDIA A100 80GB PCIe
+#NVIDIA RTX A6000
 
 echo "create output: $output"
 

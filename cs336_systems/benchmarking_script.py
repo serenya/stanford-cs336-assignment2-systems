@@ -49,7 +49,7 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
             t2 = timeit.default_timer()
             forward_time.append(t2-t1)
 
-            print(f"\rBenchmark step backward pass: {step}", end="")
+            """ print(f"\rBenchmark step backward pass: {step}", end="")
             t1 = timeit.default_timer()
             loss = cross_entropy(logits, y)
 
@@ -60,7 +60,7 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
             torch.cuda.synchronize()
 
         t2 = timeit.default_timer()
-        backward_time.append(t2-t1)
+        backward_time.append(t2-t1) """
 
         # Save a pickle file to be loaded by PyTorch's online tool.
         torch.cuda.memory._dump_snapshot(f"/workspace/memory_snapshot_{context_length}.pickle")
@@ -104,9 +104,7 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="2.7B", context_length=256, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True)) """
 
-    #results.append(run_basics_transformer_model(size="2.7B", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
-
-    results.append(run_basics_transformer_model(size="medium", context_length=256, d_model=1024, d_ff=4096, num_layers=24, num_heads=16, w_num_steps = 5, num_steps = 10, use_autocast=True))
+    results.append(run_basics_transformer_model(size="2.7B", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
 
 
     df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std', 'Mixed precision BF16'])
