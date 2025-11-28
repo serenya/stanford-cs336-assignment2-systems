@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
     results.append(run_basics_transformer_model(size="2.7B", context_length=256, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True)) """
 
-    results.append(run_basics_transformer_model(size="2.7B", context_length=128, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
+    results.append(run_basics_transformer_model(size="2.7B", context_length=512, d_model=2560, d_ff=10240, num_layers=32, num_heads=32, w_num_steps = 5, num_steps = 10, use_autocast=True))
 
 
     df = pd.DataFrame(results, columns=['Model', 'Forward Time Avg', 'Forward Time Std', 'Backward Time Avg', 'Backward Time Std', 'Mixed precision BF16'])
