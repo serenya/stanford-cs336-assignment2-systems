@@ -13,4 +13,6 @@ ssh root@$IP -p $PORT -i ~/.ssh/runpod_ed25519 \
 "bash -s -- https://github.com/serenya/stanford-cs336-assignment2-systems.git task/memory_profiling cs336_systems.benchmarking_script" \
  < run_benchmarking_script_on_runpod.sh
 
-#runpodctl remove pod $POD_ID
+scp -P $PORT -i ~/.ssh/runpod_ed25519 root@$IP:/workspace/* ~/development/stanford-cs336/stanford-cs336-assignment2-systems/memory_profiling
+
+runpodctl remove pod $POD_ID
