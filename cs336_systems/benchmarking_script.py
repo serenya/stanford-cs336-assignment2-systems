@@ -50,18 +50,18 @@ def run_basics_transformer_model(size, context_length, d_model, d_ff, num_layers
             t2 = timeit.default_timer()
             forward_time.append(t2-t1)
 
-            print(f"\rBenchmark step backward pass: {step}", end="")
-            t1 = timeit.default_timer()
-            loss = cross_entropy(logits, y)
+            #print(f"\rBenchmark step backward pass: {step}", end="")
+            #t1 = timeit.default_timer()
+            #loss = cross_entropy(logits, y)
 
-        loss.backward()
-        #optimizer.step()
+        """ loss.backward()
+        optimizer.step()
         
         if torch.cuda.is_available():
             torch.cuda.synchronize()
 
         t2 = timeit.default_timer()
-        backward_time.append(t2-t1)
+        backward_time.append(t2-t1) """
 
     # Save a pickle file to be loaded by PyTorch's online tool.
     torch.cuda.memory._dump_snapshot(f"/workspace/memory_snapshot_{size}_{context_length}_{"mixed_precision" if use_autocast else "full_precision"}_{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}.pickle")
