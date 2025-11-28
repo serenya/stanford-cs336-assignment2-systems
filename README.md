@@ -79,3 +79,5 @@ Above script could be executed remotely by running ssh command:
 `ssh root@103.67.42.152 -p 10709 -i ~/.ssh/runpod_ed25519 "bash -s -- https://github.com/serenya/stanford-cs336-assignment2-systems.git task/benchmarking_mixed_precision cs336_systems.benchmarking_script" < cs336_systems/run_benchmarking_script_on_runpod.sh`
 
 **Bear in mind that "SSH over exposed TCP" should be taken from Connect tab in RunPod server details screen.**
+
+Alternatively run `bash main.sh` from `cs336_systems/scripts` folder that spins up the Runpod instance automatically and run bechmarking script against remote server
